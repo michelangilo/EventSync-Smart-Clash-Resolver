@@ -27,14 +27,6 @@ const Schedule = () => {
         });
     }
 
-    useEffect(() => {
-        fetchVenues();
-    }, []);
-
-    useEffect(() => {
-        fetchEvents();
-    }, [fetchEvents]);
-
     const fetchVenues = async () => {
         try {
             const response = await venueAPI.getAll();
@@ -69,6 +61,14 @@ const Schedule = () => {
             setLoading(false);
         }
     }, [selectedDate, view]);
+
+    useEffect(() => {
+        fetchVenues();
+    }, []);
+
+    useEffect(() => {
+        fetchEvents();
+    }, [fetchEvents]);
 
     const getWeekStart = (date) => {
         const d = new Date(date);
@@ -136,7 +136,7 @@ const Schedule = () => {
     };
 
     const goToToday = () => {
-        setSelectedDate(new Date().toISOString().split('T'));
+        setSelectedDate(new Date().toISOString().split('T')[0]);
     };
 
     const handleEventClick = (event) => {
