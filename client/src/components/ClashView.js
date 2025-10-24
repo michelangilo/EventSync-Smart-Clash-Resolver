@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { eventAPI, venueAPI } from '../services/api';
 
 const ClashView = () => {
@@ -19,11 +19,24 @@ const ClashView = () => {
     endTime: ''
   });
 
+  const fetchClashes = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const response = await eventAPI.getClashes(selectedDate);
+      setClashes(response.data);
+    } catch (error) {
+      setError('Failed to fetch clashes');
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedDate]);
+
   useEffect(() => {
     if (selectedDate) {
       fetchClashes();
     }
-  }, [selectedDate]);
+  }, [selectedDate, fetchClashes]);
 
   useEffect(() => {
     (async () => {
@@ -41,19 +54,6 @@ const ClashView = () => {
       setEditForm((prev) => ({ ...prev, venueId: venues[0]._id.toString() }));
     }
   }, [editing, venues, editForm.venueId]);
-
-  const fetchClashes = async () => {
-    try {
-      setLoading(true);
-      setError('');
-      const response = await eventAPI.getClashes(selectedDate);
-      setClashes(response.data);
-    } catch (error) {
-      setError('Failed to fetch clashes');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getSuggestions = async (eventId, startTime, endTime) => {
     try {
@@ -193,7 +193,7 @@ const ClashView = () => {
                 </div>
 
                 <div className="clashing-events">
-                  {clash.events.map((event, eventIndex) => (
+                  {clash.events.map((event) => (
                     <div key={event._id} className={`event-details ${event.status}`}>
                       <div className="event-info">
                         <div className="event-title-row">

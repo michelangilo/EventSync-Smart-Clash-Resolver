@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { eventAPI, venueAPI } from '../services/api';
 
 const Dashboard = () => {
@@ -10,11 +10,7 @@ const Dashboard = () => {
   );
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchData();
-  }, [selectedDate]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const [eventsResponse, venuesResponse, allEventsResponse] = await Promise.all([
@@ -30,7 +26,11 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedDate]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const formatTime = (dateString) => {
     return new Date(dateString).toLocaleTimeString('en-US', {

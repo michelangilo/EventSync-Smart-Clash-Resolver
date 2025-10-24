@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { eventAPI, venueAPI } from '../services/api';
 import './Schedule.css';
 
@@ -12,7 +12,7 @@ const Schedule = () => {
     const [selectedVenues, setSelectedVenues] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [success] = useState('');
 
     // Time slots: 8 AM to 10 PM (14 hours), each split into 2 half-hour slots
     const timeSlots = [];
@@ -45,7 +45,7 @@ const Schedule = () => {
         }
     };
 
-    const fetchEvents = async () => {
+    const fetchEvents = useCallback(async () => {
         try {
             setLoading(true);
             setError('');
@@ -68,7 +68,7 @@ const Schedule = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [currentDate]);
 
     const getWeekStart = (date) => {
         const d = new Date(date);
@@ -208,7 +208,7 @@ const Schedule = () => {
 
             {/* Schedule Grid */}
             <div className="schedule-container">
-                <div className="schedule-grid" style={{ ['--dynamic-venue-count']: filteredVenues.length }} >
+                <div className="schedule-grid" style={{ '--dynamic-venue-count': filteredVenues.length }} >
                     {/* Header with venue names */}
                     <div className="schedule-header">
                         <div className="time-header">Time</div>
