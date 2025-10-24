@@ -193,36 +193,36 @@
 </ul>
 
 <h3>Backend Setup</h3>
-<pre><code># Navigate to server directory
+<pre><code>Navigate to server directory
 cd server
 
-# Install dependencies
+<h3>Install dependencies</h3>
 npm install
 
-# Create environment file
+<h3>Create environment file</h3>
 cp .env.example .env
 
-# Edit .env with your MongoDB connection string
-# MONGODB_URI=mongodb://localhost:27017/eventsync
-# PORT=5000
-# NODE_ENV=development
+<h3>Edit .env with your MongoDB connection string</h3>
+<h3>MONGODB_URI=mongodb://localhost:27017/eventsync</h3>
+<h3>PORT=5000</h3>
+<h3>NODE_ENV=development</h3>
 
-# Start the server
+<h3>Start the server</h3>
 npm run dev</code></pre>
 
 <h3>Frontend Setup</h3>
 <pre><code># Navigate to client directory (from project root)
 cd client
 
-# Install dependencies
+<h3>Install dependencies</h3>
 npm install
 
-# Start the development server
+<h3>Start the development server</h3>
 npm start</code></pre>
 
 <h3>Database Setup</h3>
-<pre><code># MongoDB will create collections automatically
-# Default collections: events, venues
+<pre><code>MongoDB will create collections automatically
+Default collections: events, venues
 
 <h3>Verification</h3>
 <ul>
@@ -230,13 +230,8 @@ npm start</code></pre>
     <li>Frontend: <a href="http://localhost:3000">http://localhost:3000</a></li>
     <li>Database: Check MongoDB connection in server logs</li>
 </ul>
-
-<hr>
-
 <h2 id="usage">Usage</h2>
-
 <h3>Quick Start Guide</h3>
-
 <h4>1. Create Your First Venue</h4>
 <ol>
     <li>Navigate to <strong>Venues</strong> tab</li>
@@ -270,11 +265,11 @@ npm start</code></pre>
     <li>Click events for details and quick actions</li>
 </ol>
 
-<h3>Advanced Features</h3>
+<h2>Advanced Features</h2>
 
 <h4>Force-Create Workflow</h4>
 <pre><code>1. Create an event with a conflicting time
-2. System detects a clash and shows warning
+2. The system detects a clash and shows warning
 3. Choose "Yes" to proceed
 4. Event created with "tentative" status
 5. Resolve later via Clashes page</code></pre>
@@ -558,7 +553,7 @@ db.events.find({
 
 <h3>Performance Optimizations</h3>
 
-<h4>Frontend</h4>
+<h3>Frontend</h3>
 <ul>
     <li><strong>React Hooks:</strong> Efficient state management and side effects</li>
     <li><strong>Memoization:</strong> Prevent unnecessary re-renders</li>
@@ -566,7 +561,7 @@ db.events.find({
     <li><strong>Debounced Inputs:</strong> Reduce API calls during typing</li>
 </ul>
 
-<h4>Backend</h4>
+<h3>Backend</h3>
 <ul>
     <li><strong>Database Indexing:</strong> Optimized queries for venue/time lookups</li>
     <li><strong>Mongoose Population:</strong> Efficient related data loading</li>
