@@ -33,7 +33,7 @@ const Schedule = () => {
 
     useEffect(() => {
         fetchEvents();
-    }, [selectedDate, view, selectedVenues]);
+    }, [fetchEvents]);
 
     const fetchVenues = async () => {
         try {
@@ -68,7 +68,7 @@ const Schedule = () => {
         } finally {
             setLoading(false);
         }
-    }, [currentDate]);
+    }, [selectedDate, view]);
 
     const getWeekStart = (date) => {
         const d = new Date(date);
